@@ -1,0 +1,8 @@
+<div class = "forecast">
+    <ng-template *ngIf = "date; else elseBlock">On {{date!.getMonth()}}/{{date!.getDate()}}/{{date!.getFullYear()}}, the weather is</ng-template>
+    <ng-template #elseBlock>{{forecast.dt_txt}}</ng-template>
+        <div>{{forecast.weather?.main}}</div>
+        <div>{{forecast.weather?.description}}</div>
+        <div>{{forecast.main?.temp}}</div>
+        <div *ngIf = "forecast.weather?.icon"><img src='{{ "http://openweathermap.org/img/wn/" + forecast.weather?.icon + "@2x.png"}}'></div>
+</div>

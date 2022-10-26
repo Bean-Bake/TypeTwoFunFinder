@@ -1,0 +1,11 @@
+# PRIVATE INFO REGARDING API KEYS AND SUCH
+.env
+
+# INFO FOR schema of the PSQL tables used for app
+Table Schema.sql
+
+# web scraper to scrape MP areas to be used as data
+scrape/
+
+# for server node_modules
+node_modules/

@@ -1,0 +1,6 @@
+<h4 class = "title"><a class = "title" routerLink = "../state/{{state}}">{{state}}</a></h4>
+<ng-container *ngFor = "let location of locations">
+    <p *ngIf = "this.locations.indexOf(location) === this.locations.length - 1; then thenBlock else elseBlock">{{location.name}}, </p>
+    <ng-template #thenBlock><a class = "location" routerLink = "/location/{{location.id}}">{{location.name}}</a></ng-template>
+    <ng-template #elseBlock><a class = "location" routerLink = "/location/{{location.id}}">{{location.name}}</a>,&ensp;</ng-template>
+</ng-container>

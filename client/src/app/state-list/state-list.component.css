@@ -1,0 +1,18 @@
+.location-list
+{
+    display:inline;
+}
+ng-template
+{
+    display:inline;
+}
+a.location
+{
+    color:gray;
+    font-size:x-small;
+}
+a.title
+{
+    font-size:small;
+    color:orange;
+}

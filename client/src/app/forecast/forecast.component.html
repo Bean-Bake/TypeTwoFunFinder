@@ -1,0 +1,8 @@
+<!-- <div class = "weather">
+    <app-weather-box [forecast] = "currentForecast" [date] = "currentDate"></app-weather-box>
+</div> -->
+<div class = "forecast-wrapper">
+    <div *ngFor = "let forecast of extendedForecast"><app-weather-box [forecast] = "forecast"></app-weather-box></div>
+</div>
+
+

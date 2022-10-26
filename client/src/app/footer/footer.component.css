@@ -1,0 +1,36 @@
+
+.footer-container
+{
+    background-image: linear-gradient(to right, darkslategray, gray, darkslategray);
+    display: grid;
+    grid-template-rows: 30px;
+    grid-template-columns: 25% 50% 25%;
+    grid-template-areas:
+    "contact . thanks"
+}
+.contact
+{
+    grid-area: 'contact';
+    padding-left: 10px;
+    padding-top: 5px;
+}
+.thanks
+{
+    grid-area: 'thanks';
+    text-align: right;
+    color:orangered;
+    padding-right: 10px;
+    padding-top: 5px;
+}
+.extra-links
+{
+    display: grid;
+    grid-template-columns: repeat(4, 25%)
+}
+.link
+{
+    text-align: center;
+    position: relative;
+    font-size: small;
+    padding-top: 5px;
+}

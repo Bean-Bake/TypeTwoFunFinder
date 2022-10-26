@@ -1,0 +1,13 @@
+.title
+{
+    text-align: center;
+    color: orangered;
+}
+.list-wrapper
+{
+    display: grid;
+}
+.state-list
+{
+    display:table-row;
+}

@@ -1,0 +1,40 @@
+.header-container
+{
+    background-image: linear-gradient(to right, gray, darkslategray, gray);
+    display: grid;
+    grid-template-rows: 25px;
+    grid-template-columns: 25% 50% 5% 20%;
+    grid-template-areas:
+    ". inner . searchbar"
+
+}
+.header-inner
+{
+    display:grid;
+    grid-area: inner;
+    grid-template-rows: 100%;
+    grid-template-columns: 5% 25% 40% 30%;
+    grid-template-areas:
+    "icon . title .";
+}
+.header-icon
+{
+    grid-area: icon;
+    display: flex;
+    justify-content: center;
+}
+.header-title
+{
+    grid-area: title;
+    display: flex;
+    justify-content: center;
+    color:orangered;
+    font-family:fantasy;
+    text-decoration: none;
+}
+.search-bar
+{
+    grid-area: searchbar;
+    display: flex;
+    top:50%
+}
