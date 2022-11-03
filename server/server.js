@@ -7,7 +7,6 @@ const db = require("../server/database");
 const app = express();
 const axios = require("axios")
 
-
 // SO ONE DOMAIN CAN BE QUERIED BY ANOTHER
 const cors = require("cors");
 app.use(cors());
@@ -85,15 +84,15 @@ app.get
 // RANDOM GET MAP
 app.get
 (
-    "/map", async (req, res) =>
+    "/api/v1/map", async (req, res) =>
     {
        try
        {
             const {data} = await axios({
             method: "get",
-            url: 'https://maps.googleapis.com/maps/api/staticmap?center=40.714%2c%20-73.998&zoom=12&size=400x400&key=' + process.env.GMKEY,
+            url: `https://maps.googleapis.com/maps/api/js?key=${process.env.GMKEY}&callback=locationMap`,
             });
-            res.json(data);
+            res.send(data);
        }
        catch (error)
        {
