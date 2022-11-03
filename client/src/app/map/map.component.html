@@ -1,0 +1,17 @@
+<div class = "map-wrapper">
+    <google-map class = "map"
+        height="500px"
+        width="80%"
+        [options] = "options">
+        
+        <map-marker #marker *ngFor="let customMarker of customMarkers"
+            [position]="customMarker.markerPosition"
+            [options]="customMarker.markerOptions"
+            (mapClick) = "this.routeToLocation(customMarker.id)"
+            >
+        </map-marker>
+    </google-map> 
+</div>
+<h2 class = "location-link">
+    <a routerLink="/locations">All Locations</a>
+</h2>

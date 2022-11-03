@@ -15,6 +15,7 @@ import { LocationDetailsComponent } from './location-details/location-details.co
 import { StateDetailPageComponent } from './state-detail-page/state-detail-page.component';
 import { ForecastComponent } from './forecast/forecast.component';
 import { WeatherBoxComponent } from './weather-box/weather-box.component'
+import { GoogleMap } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -33,9 +34,10 @@ import { WeatherBoxComponent } from './weather-box/weather-box.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    GoogleMapsModule
   ],
-  providers: [],
+  providers: [GoogleMap],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

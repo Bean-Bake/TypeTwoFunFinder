@@ -44,4 +44,8 @@ export class BackEndService
   {
     return this.http.get<string>(`${environment.api}/forecast/${latitude}/${longitude}`);
   }
+  getMap()
+  {
+    return this.http.get(`${environment.api}/map`);
+  }
 }

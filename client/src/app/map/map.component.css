@@ -1,0 +1,14 @@
+
+.map-wrapper
+{
+    margin-left: 10%;
+}
+.location-link
+{
+    text-align: center;
+}
+a
+{   
+    text-decoration: none;
+    color: orangered;
+}
