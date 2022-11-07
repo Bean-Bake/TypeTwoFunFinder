@@ -48,4 +48,9 @@ export class BackEndService
   {
     return this.http.get(`${environment.api}/map`);
   }
+
+  searchPhrase(query: string)
+  {
+    return this.http.get<Observable<Location[]>>(`${environment.api}/locations/search/${query}`);
+  }
 }

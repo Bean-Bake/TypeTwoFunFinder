@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackEndService } from '../back-end.service';
 import { Location } from '../location';
@@ -19,6 +19,11 @@ export class LocationDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void 
+  {
+    this.getLocation(parseInt(this.router.url.split('/')[2]));
+  }
+
+  ngOnChanges(changes: SimpleChanges)
   {
     this.getLocation(parseInt(this.router.url.split('/')[2]));
   }

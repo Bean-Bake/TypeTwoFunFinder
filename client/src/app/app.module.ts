@@ -16,6 +16,11 @@ import { StateDetailPageComponent } from './state-detail-page/state-detail-page.
 import { ForecastComponent } from './forecast/forecast.component';
 import { WeatherBoxComponent } from './weather-box/weather-box.component'
 import { GoogleMap } from '@angular/google-maps';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { CustomRouteReuse } from './CustomRouteReuse';
+import { RouteReuseStrategy } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -29,15 +34,18 @@ import { GoogleMap } from '@angular/google-maps';
     LocationDetailsComponent,
     StateDetailPageComponent,
     ForecastComponent,
-    WeatherBoxComponent
+    WeatherBoxComponent,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    FormsModule,
+    CommonModule
   ],
-  providers: [GoogleMap],
+  providers: [GoogleMap, {provide: RouteReuseStrategy, useClass: CustomRouteReuse}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

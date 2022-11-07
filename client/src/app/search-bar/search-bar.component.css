@@ -1,0 +1,27 @@
+.search-wrapper
+{
+    position: relative;
+    z-index: 10;
+}
+.search-form
+{
+    position: relative;
+    height: 75%;
+}
+.search-results
+{
+    position: absolute;
+    min-height: 10px;
+    width: 100%;
+    max-height: 100px;
+    background-color: darkgray;
+    display: flex;
+    visibility: collapse;
+    flex-direction: column;
+    overflow-x: hidden;
+    font-size: x-small;
+}
+a
+{
+    color:orangered;
+}

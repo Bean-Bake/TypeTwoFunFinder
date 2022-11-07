@@ -1,0 +1,9 @@
+<div class = "search-wrapper">
+    <input #input type = "text" class = "search-form" placeholder = "Search locations"
+    required [(ngModel)] = "searchInput" name = "search" (ngModelChange) = "searchDatabase(searchInput)" (focus) = "searchFocused()">
+    <div #response *ngIf = "this.searchResponse.length > 0 && searchFocus">
+        <div #response class = "search-results" [ngStyle] = "{'visibility': 'visible'}">
+            <div #response *ngFor = "let location of searchResponse"><a #response (click) = "resetSearchBar()" routerLink = "/location/{{location.id}}">{{location.name}}</a></div>
+        </div>
+    </div>
+</div>

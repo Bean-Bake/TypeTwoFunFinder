@@ -18,6 +18,14 @@ app.use(express.json());
 // DEFINE PORT
 const port = process.env.PORT || 3001;
 
+//STARTUP
+app.listen
+(port, () => 
+    {
+        console.log(`SERVER UP ON PORT ${port}`);
+    }
+);
+
 // GET CURRENT WEATHER FOR A LOCATION VIA OWM
 app.get
 (
@@ -120,14 +128,6 @@ app.get
        } 
     }
 )
-
-//STARTUP
-app.listen
-(port, () => 
-    {
-        console.log(`SERVER UP ON PORT ${port}`);
-    }
-);
 
 // GET ALL LOCATIONS
 app.get
@@ -263,6 +263,34 @@ app.get
     }
 );
 
+// GET LOCATIONS INCLUDING SEARCH PHRASE
+app.get
+(
+    "/api/v1/locations/search/:phrase", async (req, res) =>
+    {
+        try 
+        {
+            const results = await db.query
+            ("SELECT locations.id, locations.name, locations.category, locations.latitude, locations.longitude, locations.country, \
+            states.name AS state FROM locations, states \
+            WHERE POSITION(LOWER($1) in LOWER(locations.name)) > 0 AND states.id = locations.state_id", 
+            [req.params.phrase]);
+
+            res.status(200).json
+            ({
+                status: "success",
+                data:
+                {
+                    locations: results.rows
+                }
+            });
+        }
+        catch (error)
+        {
+            console.log(error);
+        }
+    }
+);
 
 // CREATE A NEW LOCATION
 app.post

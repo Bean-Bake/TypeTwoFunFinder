@@ -36,5 +36,5 @@
 {
     grid-area: searchbar;
     display: flex;
-    top:50%
+    justify-content: bottom;
 }
