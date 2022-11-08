@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'state/:state', component: StateDetailPageComponent},
   { path: 'location/:id', component: LocationDetailsComponent },
-  { path: 'home', component: MapComponent}
+  { path: 'home', component: HomePageComponent},
+  { path: 'dashboard', component: HomePageComponent}
 ];
 
 @NgModule({

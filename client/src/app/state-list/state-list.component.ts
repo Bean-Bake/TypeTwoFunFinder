@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { BackEndService } from '../back-end.service';
 import { Location } from '../location';
 
@@ -11,7 +11,7 @@ import { Location } from '../location';
 export class StateListComponent implements OnInit {
 
   @Input() state: string = "";
-  locations: Location[] = [];
+  @Input() locations: Location[] = [];
 
   constructor(
     private http: HttpClient, 
@@ -38,8 +38,8 @@ export class StateListComponent implements OnInit {
   {
     this.backend.getLocationsByState(this.state)
     .subscribe(response => 
-      {
-        this.locations = JSON.parse(JSON.stringify(response)).data.locations;
-      });
+    {
+      this.locations = JSON.parse(JSON.stringify(response)).data.locations;
+    });
   }
 }

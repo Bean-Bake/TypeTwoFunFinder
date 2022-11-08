@@ -1,21 +1,20 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { BackEndService } from '../back-end.service';
 import { Location } from '../location';
 import { CustomMarker } from '../custom-marker';
 import { Router } from '@angular/router';
+import { last } from 'rxjs';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
-  
-  options: google.maps.MapOptions = {
-    center: {lat: 39.833333, lng: -98.583333},
-    zoom: 4
-  }
+export class MapComponent implements OnInit 
+{
+  center: google.maps.LatLngLiteral = {lat: 39.833333, lng: -98.583333};
+  zoom = 4;
 
   icon: google.maps.Icon = 
   {
@@ -23,8 +22,12 @@ export class MapComponent implements OnInit {
       scaledSize: new google.maps.Size(20, 20),
   }
 
-  locations: Location[] = [];
+  @Input() locations: Location[] = [];
+  @Input() state: string = "";
   customMarkers: CustomMarker[] = [];
+
+  avgLat: number = 0;
+  avgLng: number = 0;
 
   constructor(
     private http: HttpClient, 
@@ -33,25 +36,64 @@ export class MapComponent implements OnInit {
   ) 
   {
   }
-    
-   ngOnInit()
+
+  updateCenter()
   {
-    this.getLocations();
+    this.center = {lat: this.avgLat, lng: this.avgLng}
+    this.zoom = 5;
+  }
+    
+  ngOnInit()
+  {
+    if (this.state.length === 0)
+    {
+      this.getLocations();
+    }
+    else
+    {
+      this.getLocationsByState(this.state);
+    }
   }
 
-   getLocations(): void
+  ngOnChanges(changes: SimpleChanges)
+  {
+    if (this.state.length === 0)
+    {
+      this.getLocations();
+    }
+    else
+    {
+      this.getLocationsByState(this.state);
+    }
+  }
+
+  getLocations(): void
   {
     this.backend.getLocations()
     .subscribe(response => 
-      {
-        this.locations = JSON.parse(JSON.stringify(response)).data.locations;
-        this.convertLocationToCoordinates();
-      });
+    {
+      this.locations = JSON.parse(JSON.stringify(response)).data.locations;
+      this.convertLocationToCoordinates();
+    });
+  }
+
+  getLocationsByState(state: string)
+  {
+    this.backend.getLocationsByState(state)
+    .subscribe(response => 
+    {
+      this.locations = JSON.parse(JSON.stringify(response)).data.locations;
+      this.convertLocationToCoordinates();
+      this.updateCenter();
+    });
   }
 
   convertLocationToCoordinates()
   {
     this.locations.forEach(location  => {
+
+      this.avgLat = this.avgLat + Number(location.latitude);
+      this.avgLng = this.avgLng + Number(location.longitude);
 
       const coords: google.maps.LatLngLiteral = {lat: Number(location.latitude!), 
         lng: Number(location.longitude!)};
@@ -70,10 +112,15 @@ export class MapComponent implements OnInit {
           markerPosition: coords,
           id: location.id!,
         }
-
+        
         this.customMarkers.push(marker);
-    })
-  }
+    });
+
+    this.avgLat = this.avgLat / (this.locations.length + 1);
+    this.avgLng = this.avgLng / (this.locations.length + 1);
+  };
+
+
 
   routeToLocation(id: number)
   {

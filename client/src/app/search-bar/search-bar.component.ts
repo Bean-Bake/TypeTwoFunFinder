@@ -64,10 +64,9 @@ export class SearchBarComponent implements OnInit {
     }
     else
     {
-      if (this.searchResponded === false)
+      if (this.searchResponse.length === 0)
       {
         this.searchForPhrase(query);
-        this.searchResponded = true;
       }
       else
       {
@@ -111,6 +110,5 @@ export class SearchBarComponent implements OnInit {
     this.searchInput = "";
     this.searchResponse = [];
     this.searchFocus = false;
-    this.searchResponded = false;
   }
 }

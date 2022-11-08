@@ -2,7 +2,9 @@
     <google-map class = "map"
         height="500px"
         width="80%"
-        [options] = "options">
+        [zoom] = "zoom"
+        [center] = "center"
+        >
         
         <map-marker #marker *ngFor="let customMarker of customMarkers"
             [position]="customMarker.markerPosition"

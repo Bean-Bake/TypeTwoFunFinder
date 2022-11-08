@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackEndService } from '../back-end.service';
+import { Location } from '../location';
 
 @Component({
   selector: 'app-state-detail-page',
@@ -10,6 +11,7 @@ import { BackEndService } from '../back-end.service';
 export class StateDetailPageComponent implements OnInit {
 
   state: string = "";
+  locations: Location[] = [];
 
   constructor(
     private router: Router,
@@ -24,9 +26,13 @@ export class StateDetailPageComponent implements OnInit {
 
   }
 
-  getLocations(): void
+  getLocations()
   {
-
+    this.backend.getLocationsByState(this.state)
+    .subscribe(response => 
+      {
+        this.locations = JSON.parse(JSON.stringify(response)).data.locations;
+      });
   }
 
 }
